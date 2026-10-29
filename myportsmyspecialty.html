@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 MY SPORTS, MY SPECIALTY!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.cdnfonts.com/css/century-gothic" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Century Gothic', sans-serif;
+            background-color: #0a0a0a; /* Deep black */
+            background-image: radial-gradient(#330000 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: #ffffff;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        /* Hide scrollbar for a cleaner app-like feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #dc2626; border-radius: 4px; }
+        
+        .hide { display: none !important; }
+        
+        /* Sporty Card Effects */
+        .card-hover { transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+        .card-hover:hover { 
+            transform: translateY(-2px) scale(1.02); 
+            box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.4); 
+            border-color: #ef4444;
+        }
+        
+        /* Speaking Animation */
+        .speaking-pulse { animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* Layout sizing */
+        .fit-screen {
+            height: calc(100vh - 70px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Prevent text from overflowing */
+        .word-wrap-safe {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+        }
+
+        /* Teacher Mode Security */
+        body:not(.teacher-auth) .strict-teacher-tool {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="text-white h-screen flex flex-col overflow-hidden">
+
+    <header class="bg-red-900 text-white shadow-2xl border-b-4 border-red-600 sticky top-0 z-50 h-[70px] flex items-center shrink-0">
+        <div class="w-full max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-black flex items-center gap-2 cursor-pointer tracking-wider text-yellow-400 drop-shadow-md whitespace-normal break-words leading-tight" onclick="navigate('menu')">
+                🏆 MY SPORTS!
+            </h1>
+            <nav class="flex gap-2 sm:gap-4 shrink-0">
+                <button onclick="navigate('menu')" class="bg-black hover:bg-gray-800 text-red-500 border border-red-600 font-bold py-1 sm:py-2 px-4 sm:px-6 rounded-xl transition text-sm sm:text-lg shadow-lg">
+                    🏠 HOME
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div id="custom-modal" class="fixed inset-0 bg-black bg-opacity-90 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-gray-900 border-4 border-red-600 rounded-3xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center">
+            <div id="modal-icon" class="text-5xl sm:text-6xl mb-4">🔔</div>
+            <h3 id="modal-title" class="text-2xl sm:text-3xl font-black mb-4 text-yellow-400 tracking-wide break-words">MESSAGE</h3>
+            <p id="modal-message" class="text-white mb-8 font-bold text-lg sm:text-xl leading-relaxed break-words"></p>
+            <button onclick="closeModal()" class="w-full bg-red-600 hover:bg-red-500 text-white font-black py-4 px-6 rounded-2xl transition text-xl sm:text-2xl uppercase tracking-widest shadow-lg">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <!-- Hidden Global File Input -->
+    <input type="file" id="global-img-upload" class="hidden" accept="image/*">
+
+    <main class="flex-grow w-full max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-4 fit-screen">
+        
+        <!-- SEC: MENU -->
+        <section id="sec-menu" class="text-center w-full h-full flex flex-col justify-center">
+            <div class="bg-black bg-opacity-80 rounded-3xl p-4 sm:p-6 border-4 border-red-600 mb-4 shadow-2xl shrink-0">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-yellow-400 mb-2 tracking-tighter drop-shadow-lg uppercase word-wrap-safe leading-tight">
+                    MY SPORTS, MY SPECIALTY!
+                </h1>
+                <h2 class="text-lg sm:text-xl md:text-2xl text-red-500 font-bold uppercase tracking-widest">Learn. Listen. Speak. Play!</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 flex-grow min-h-0 overflow-y-auto pb-4">
+                <button onclick="navigate('vocabulary')" class="card-hover bg-gradient-to-br from-gray-900 to-black border-2 border-red-700 text-white rounded-2xl p-3 text-left flex flex-col justify-center items-center text-center group">
+                    <span class="text-4xl sm:text-5xl mb-2 group-hover:scale-110 transition-transform">📖</span>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-red-500 uppercase tracking-wide break-words w-full">1. Vocabulary</h3>
+                </button>
+                <button onclick="navigate('gallery')" class="card-hover bg-gradient-to-br from-gray-900 to-black border-2 border-red-700 text-white rounded-2xl p-3 text-left flex flex-col justify-center items-center text-center group">
+                    <span class="text-4xl sm:text-5xl mb-2 group-hover:scale-110 transition-transform">🖼️</span>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-yellow-500 uppercase tracking-wide break-words w-full">2. Gallery</h3>
+                </button>
+                <button onclick="navigate('listening')" class="card-hover bg-gradient-to-br from-gray-900 to-black border-2 border-red-700 text-white rounded-2xl p-3 text-left flex flex-col justify-center items-center text-center group">
+                    <span class="text-4xl sm:text-5xl mb-2 group-hover:scale-110 transition-transform">🎧</span>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-blue-400 uppercase tracking-wide break-words w-full">3. Listening</h3>
+                </button>
+                <button onclick="navigate('identify')" class="card-hover bg-gradient-to-br from-gray-900 to-black border-2 border-red-700 text-white rounded-2xl p-3 text-left flex flex-col justify-center items-center text-center group">
+                    <span class="text-4xl sm:text-5xl mb-2 group-hover:scale-110 transition-transform">👀</span>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-green-400 uppercase tracking-wide break-words w-full">4. Identify</h3>
+                </button>
+                <button onclick="navigate('speaking')" class="card-hover bg-gradient-to-br from-gray-900 to-black border-2 border-red-700 text-white rounded-2xl p-3 text-left flex flex-col justify-center items-center text-center group">
+                    <span class="text-4xl sm:text-5xl mb-2 group-hover:scale-110 transition-transform">🗣️</span>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-purple-400 uppercase tracking-wide break-words w-full">5. Speaking</h3>
+                </button>
+                <button onclick="navigate('quiz-intro')" class="card-hover bg-gradient-to-br from-red-900 to-black border-2 border-red-500 text-white rounded-2xl p-3 text-left flex flex-col justify-center items-center text-center group">
+                    <span class="text-4xl sm:text-5xl mb-2 group-hover:scale-110 transition-transform">📝</span>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-white uppercase tracking-wide break-words w-full">6. Quiz</h3>
+                </button>
+                <button onclick="navigate('dashboard')" class="card-hover col-span-2 md:col-span-2 bg-gradient-to-r from-gray-800 to-gray-900 border-2 border-gray-600 text-white rounded-2xl p-3 flex flex-row items-center justify-center gap-2 sm:gap-4 group">
+                    <span class="text-4xl sm:text-5xl group-hover:scale-110 transition-transform">👨‍🏫</span>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-300 uppercase tracking-wide break-words">7. Dashboard</h3>
+                </button>
+            </div>
+        </section>
+
+        <section id="sec-vocabulary" class="hide h-full flex flex-col justify-center w-full">
+            <div class="flex justify-between items-center mb-3 sm:mb-4 bg-gray-900 p-3 sm:p-4 rounded-2xl border-2 border-red-800 shrink-0">
+                <button id="btn-vocab-prev" class="bg-black border border-red-600 hover:bg-red-900 text-yellow-400 px-3 py-2 sm:px-6 sm:py-3 rounded-xl font-bold text-sm sm:text-xl disabled:opacity-30 disabled:hover:bg-black transition uppercase">⬅️ BACK</button>
+                <div class="text-center px-2">
+                    <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-widest drop-shadow-md">Vocabulary</h2>
+                    <span id="vocab-counter" class="text-lg sm:text-2xl font-bold text-red-500 block">1 / 11</span>
+                </div>
+                <button id="btn-vocab-next" class="bg-red-600 hover:bg-red-500 text-white px-3 py-2 sm:px-6 sm:py-3 rounded-xl font-bold text-sm sm:text-xl transition shadow-[0_0_15px_rgba(220,38,38,0.5)] uppercase">NEXT ➡️</button>
+            </div>
+            
+            <div id="vocab-card-container" class="bg-black rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row items-stretch border-4 border-red-700 flex-grow min-h-0">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+        <section id="sec-gallery" class="hide h-full flex flex-col w-full">
+            <div class="text-center mb-3 sm:mb-4 shrink-0 bg-gray-900 border-b-2 border-red-800 py-3 rounded-t-3xl shadow-lg">
+                <h2 class="text-2xl sm:text-4xl font-black text-yellow-400 uppercase tracking-widest px-2 break-words">Sports Gallery</h2>
+                <p class="text-sm sm:text-lg text-gray-400 font-bold mt-1">Tap a card to hear it, or change its picture!</p>
+            </div>
+            <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 flex-grow overflow-y-auto pr-2 pb-4">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+        <section id="sec-listening" class="hide h-full flex flex-col justify-center max-w-4xl mx-auto w-full">
+            <div class="text-center mb-4 shrink-0">
+                <h2 class="text-3xl sm:text-5xl font-black text-blue-400 uppercase tracking-widest mb-1 drop-shadow-lg break-words">Listening</h2>
+                <p class="text-lg sm:text-2xl text-gray-300 font-bold break-words px-2">Listen and choose the correct sport.</p>
+            </div>
+            <div class="bg-black rounded-3xl shadow-2xl p-4 sm:p-8 border-4 border-blue-900 text-center flex flex-col items-center flex-grow min-h-0 overflow-y-auto justify-center">
+                <div class="w-24 h-24 sm:w-40 sm:h-40 bg-gray-900 border-4 border-blue-500 rounded-full flex items-center justify-center text-[4rem] sm:text-[5rem] mb-6 shadow-[0_0_30px_rgba(59,130,246,0.3)] shrink-0">
+                    🎧
+                </div>
+                <div class="flex gap-4 mb-6 justify-center w-full shrink-0">
+                    <button onclick="playListeningAudio(0.45)" class="flex-1 bg-gray-800 border-2 border-blue-500 hover:bg-blue-900 text-yellow-400 py-3 rounded-2xl font-black text-lg sm:text-2xl transition shadow-lg uppercase">
+                        🐢 SLOW
+                    </button>
+                    <button onclick="playListeningAudio(1.0)" class="flex-1 bg-blue-700 hover:bg-blue-600 text-white py-3 rounded-2xl font-black text-lg sm:text-2xl transition shadow-lg uppercase">
+                        🔊 NORMAL
+                    </button>
+                </div>
+                <div id="listening-options" class="grid grid-cols-2 gap-3 w-full shrink-0">
+                    <!-- Injected via JS -->
+                </div>
+                <button id="btn-listening-next" class="mt-6 hidden bg-blue-600 hover:bg-blue-500 text-white py-4 rounded-2xl font-black text-xl sm:text-3xl w-full transition shadow-[0_0_20px_rgba(59,130,246,0.5)] uppercase tracking-widest shrink-0">
+                    NEXT QUESTION ➡️
+                </button>
+            </div>
+        </section>
+
+        <section id="sec-identify" class="hide h-full flex flex-col justify-center max-w-4xl mx-auto w-full">
+            <div class="text-center mb-4 shrink-0">
+                <h2 class="text-3xl sm:text-5xl font-black text-green-400 uppercase tracking-widest mb-1 drop-shadow-lg break-words">Identify</h2>
+                <p class="text-lg sm:text-2xl text-gray-300 font-bold break-words px-2">Look at the picture and select the word.</p>
+            </div>
+            <div class="bg-black rounded-3xl shadow-2xl p-4 sm:p-6 border-4 border-green-900 text-center flex flex-col items-center flex-grow min-h-0 overflow-y-auto justify-center">
+                <div id="identify-image" class="w-full flex justify-center mb-6 h-32 sm:h-48 md:h-64 shrink-0">
+                    <!-- Injected via JS -->
+                </div>
+                <div id="identify-options" class="grid grid-cols-2 gap-3 w-full shrink-0">
+                    <!-- Injected via JS -->
+                </div>
+                <button id="btn-identify-next" class="mt-6 hidden bg-green-600 hover:bg-green-500 text-white py-4 rounded-2xl font-black text-xl sm:text-3xl w-full transition shadow-[0_0_20px_rgba(34,197,94,0.5)] uppercase tracking-widest shrink-0">
+                    NEXT QUESTION ➡️
+                </button>
+            </div>
+        </section>
+
+        <section id="sec-speaking" class="hide h-full flex flex-col justify-center max-w-4xl mx-auto w-full">
+            <div class="text-center mb-4 shrink-0">
+                <h2 class="text-3xl sm:text-5xl font-black text-purple-400 uppercase tracking-widest mb-1 drop-shadow-lg break-words">Speaking</h2>
+                <p class="text-lg sm:text-2xl text-gray-300 font-bold break-words px-2">Say the word loudly and clearly!</p>
+            </div>
+            <div class="bg-black rounded-3xl shadow-2xl p-4 sm:p-8 border-4 border-purple-900 text-center flex flex-col items-center justify-center flex-grow min-h-0">
+                <div id="speaking-image" class="w-full flex justify-center mb-4 h-32 sm:h-48 md:h-56 shrink-0">
+                    <!-- Injected via JS -->
+                </div>
+                <div id="speaking-target" class="text-3xl sm:text-4xl md:text-5xl font-black text-yellow-400 mb-6 tracking-wider drop-shadow-[0_0_10px_rgba(250,204,21,0.3)] break-words whitespace-normal px-2 leading-tight w-full">Word</div>
+                
+                <div class="flex justify-center gap-4 mb-6 w-full max-w-lg shrink-0">
+                    <button onclick="playSpeakingAudio(0.45)" class="flex-1 bg-gray-800 hover:bg-gray-700 border-2 border-gray-600 text-white py-3 rounded-xl font-bold text-lg sm:text-2xl transition uppercase">🐢 SLOW</button>
+                    <button onclick="playSpeakingAudio(1.0)" class="flex-1 bg-gray-800 hover:bg-gray-700 border-2 border-gray-600 text-white py-3 rounded-xl font-bold text-lg sm:text-2xl transition uppercase">🔊 NORMAL</button>
+                </div>
+
+                <div class="flex justify-center mb-6 shrink-0">
+                    <button id="btn-record" class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-red-600 hover:bg-red-500 text-white text-4xl sm:text-6xl shadow-[0_0_30px_rgba(220,38,38,0.6)] transition flex items-center justify-center focus:outline-none border-4 border-red-400">
+                        🎙️
+                    </button>
+                </div>
+                <p id="speaking-status" class="text-lg sm:text-2xl font-bold text-gray-400 h-8 mb-2 break-words">Click microphone to speak.</p>
+                <div id="speaking-result" class="text-2xl sm:text-3xl md:text-4xl font-black h-12 break-words leading-tight px-2"></div>
+                
+                <div class="flex justify-between mt-auto w-full border-t-2 border-gray-800 pt-4 shrink-0">
+                    <button id="btn-speak-prev" class="bg-gray-800 hover:bg-gray-700 text-gray-300 px-4 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold text-sm sm:text-2xl transition uppercase">⬅️ BACK</button>
+                    <button id="btn-speak-next" class="bg-purple-600 hover:bg-purple-500 text-white px-4 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold text-sm sm:text-2xl transition shadow-[0_0_15px_rgba(147,51,234,0.5)] uppercase">NEXT ➡️</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-quiz-intro" class="hide h-full flex flex-col justify-center max-w-2xl mx-auto text-center w-full">
+            <div class="bg-black rounded-3xl shadow-2xl p-6 sm:p-10 border-4 border-red-600 flex flex-col justify-center items-center min-h-0 overflow-y-auto">
+                <span class="text-[5rem] sm:text-[6rem] mb-4 block animate-bounce">🏆</span>
+                <h2 class="text-4xl sm:text-6xl font-black text-white mb-2 tracking-widest uppercase break-words">Quiz Time</h2>
+                <p class="text-xl sm:text-3xl text-yellow-400 mb-8 font-bold uppercase tracking-wide break-words">
+                    Test your knowledge! 10 questions.
+                </p>
+                <div class="w-full mb-6 flex flex-col items-center">
+                    <h3 class="text-lg sm:text-2xl text-white font-bold mb-3 uppercase tracking-wider">Select Student Number:</h3>
+                    <div id="student-number-grid" class="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-9 gap-2 w-full bg-gray-900 p-3 rounded-2xl border-2 border-gray-700 overflow-y-auto max-h-[200px] sm:max-h-[250px] shrink-0">
+                        <!-- Injected via JS -->
+                    </div>
+                    <div id="selected-student-display" class="mt-4 text-xl sm:text-3xl font-black text-white hidden">
+                        SELECTED: <span id="display-num" class="text-red-500 text-3xl sm:text-4xl"></span>
+                    </div>
+                </div>
+                <button onclick="startQuiz()" class="w-full bg-red-600 hover:bg-red-500 text-white py-4 sm:py-6 rounded-2xl font-black text-2xl sm:text-4xl transition shadow-[0_0_30px_rgba(220,38,38,0.6)] uppercase tracking-widest shrink-0">
+                    START QUIZ 🚀
+                </button>
+            </div>
+        </section>
+
+        <section id="sec-quiz-active" class="hide h-full flex flex-col justify-center max-w-4xl mx-auto w-full">
+             <div class="flex justify-between items-center bg-gray-900 p-3 sm:p-4 rounded-2xl shadow-lg border-2 border-red-800 mb-3 sm:mb-4 shrink-0">
+                <span id="quiz-progress" class="text-xl sm:text-3xl font-black text-yellow-400 uppercase tracking-wider">Q 1 / 10</span>
+                <span id="quiz-score-display" class="text-xl sm:text-3xl font-black text-red-500 uppercase tracking-wider">Score: 0</span>
+            </div>
+            <div class="bg-black rounded-3xl shadow-2xl p-4 sm:p-6 border-4 border-red-800 text-center flex flex-col items-center flex-grow min-h-0 overflow-y-auto justify-center">
+                <h3 id="quiz-question-text" class="text-2xl sm:text-4xl font-black text-white mb-4 uppercase tracking-wider drop-shadow-md break-words">Question</h3>
+                
+                <div id="quiz-media-area" class="w-full flex justify-center mb-6 h-32 sm:h-48 md:h-64 items-center shrink-0"></div>
+
+                <div id="quiz-options" class="grid grid-cols-2 gap-3 w-full shrink-0">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-dashboard" class="hide h-full flex flex-col w-full max-w-6xl mx-auto">
+            <div class="bg-gray-900 rounded-t-3xl border-b-4 border-red-700 p-4 sm:p-6 flex flex-col sm:flex-row gap-4 justify-between items-center shrink-0">
+                <h2 class="text-2xl sm:text-4xl font-black text-yellow-400 uppercase tracking-widest break-words">Dashboard</h2>
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-4">
+                <button onclick="exportData()" class="bg-blue-700 hover:bg-blue-600 text-white px-3 py-2 sm:px-4 sm:py-3 rounded-xl font-bold text-sm sm:text-lg transition uppercase tracking-wider shadow-lg">
+                    💾 Export
+                </button>
+                <label class="strict-teacher-tool bg-green-700 hover:bg-green-600 text-white px-3 py-2 sm:px-4 sm:py-3 rounded-xl font-bold text-sm sm:text-lg transition uppercase tracking-wider shadow-lg cursor-pointer">
+                    📂 Import
+                    <input type="file" id="import-file" class="hidden" accept=".json" onchange="importData(event)">
+                </label>
+                <button onclick="clearScoresBtn()" class="strict-teacher-tool bg-red-700 hover:bg-red-600 text-white px-3 py-2 sm:px-4 sm:py-3 rounded-xl font-bold text-sm sm:text-lg transition uppercase tracking-wider shadow-lg">
+                    🗑️ Clear
+                </button>
+            </div>
+        </div>
+
+        <!-- TEACHER ACCESS LOGIN -->
+            <div class="bg-gray-800 p-3 sm:p-4 border-b-4 border-gray-700 flex flex-col sm:flex-row items-center justify-between shrink-0 gap-3">
+                <span class="text-white font-bold uppercase tracking-wider text-sm sm:text-lg">Teacher Access Mode:</span>
+                <div class="flex gap-2 w-full sm:w-auto">
+                    <input type="password" id="teacher-pwd" placeholder="Enter PIN" class="px-3 py-2 rounded-lg bg-gray-900 text-white border-2 border-gray-600 focus:outline-none focus:border-red-500 w-full sm:w-32 font-bold text-center">
+                    <button onclick="toggleTeacherMode()" id="btn-teacher-toggle" class="bg-gray-600 hover:bg-gray-500 border-2 border-gray-500 text-white px-4 py-2 rounded-lg font-black transition uppercase tracking-wider w-full sm:w-auto shadow-md">LOGIN</button>
+                </div>
+            </div>
+
+            <div class="bg-black rounded-b-3xl border-2 border-t-0 border-gray-800 flex-grow min-h-0 overflow-hidden flex flex-col">
+                <div class="overflow-y-auto flex-grow p-2 sm:p-4">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="sticky top-0 bg-black z-10 shadow-md">
+                            <tr class="text-gray-400 text-sm sm:text-2xl uppercase tracking-wider border-b-2 border-gray-800">
+                                <th class="p-2 sm:p-4 font-black">Date</th>
+                                <th class="p-2 sm:p-4 font-black">Student No.</th>
+                                <th class="p-2 sm:p-4 font-black text-right">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashboard-table-body" class="text-white text-base sm:text-2xl font-bold">
+                            <!-- Injected via JS -->
+                        </tbody>
+                    </table>
+                    <div id="dashboard-empty" class="p-8 sm:p-12 text-center text-gray-600 text-xl sm:text-3xl font-black hidden uppercase tracking-widest break-words">
+                        No scores recorded yet.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module">
+        // ============================================================================
+        // 🚀 TO SHARE ON NETLIFY WITH CUSTOM IMAGES:
+        // 1. Upload all your custom pictures in the app.
+        // 2. Go to the Dashboard and click "Export" to download the .json file.
+        // 3. Open that .json file in Notepad/TextEdit and copy everything inside it.
+        // 4. Replace the `{}` on the line below with the copied text.
+        const PRELOADED_DATA = {}; 
+        // ============================================================================
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, deleteDoc, onSnapshot, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global State 
+        window.customImages = PRELOADED_DATA.images || {};
+        for (let i = 1; i <= 20; i++) {
+            let cached = localStorage.getItem('my_sports_img_' + i);
+            if (cached) window.customImages[i] = cached;
+        }
+
+        window.quizScores = PRELOADED_DATA.scores || [];
+        let cachedScores = localStorage.getItem('my_sports_scores');
+        if (cachedScores) window.quizScores = JSON.parse(cachedScores);
+
+        window.isFirebaseReady = false;
+        
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'my-sports-app-v3';
+        let db, auth;
+
+        async function initFirebase() {
+            if (typeof __firebase_config === 'undefined') {
+                console.warn("Cloud features missing configuration. Running locally in memory.");
+                window.isFirebaseReady = false;
+                if(window.updateAllViews) window.updateAllViews();
+                return;
+            }
+
+            try {
+                const app = initializeApp(JSON.parse(__firebase_config));
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                if (typeof __initial_auth_token !== 'undefined') {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                if (!auth.currentUser) return;
+                window.isFirebaseReady = true;
+
+                // Sync Uploaded Images across gadgets
+                const imagesRef = collection(db, 'artifacts', appId, 'public', 'data', 'sports_images');
+                onSnapshot(imagesRef, (snapshot) => {
+                    snapshot.forEach(docSnap => {
+                        window.customImages[docSnap.id] = docSnap.data().imageData;
+                        localStorage.setItem('my_sports_img_' + docSnap.id, docSnap.data().imageData);
+                    });
+                    if (window.updateAllViews) window.updateAllViews();
+                }, (err) => console.error("Sync error:", err));
+
+                // Sync Student Scores across gadgets
+                const scoresRef = collection(db, 'artifacts', appId, 'public', 'data', 'scores');
+                onSnapshot(scoresRef, (snapshot) => {
+                    window.quizScores = [];
+                    snapshot.forEach(docSnap => {
+                        window.quizScores.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    window.quizScores.sort((a, b) => b.timestamp - a.timestamp);
+                    localStorage.setItem('my_sports_scores', JSON.stringify(window.quizScores));
+                    if (window.initDashboard) window.initDashboard();
+                }, (err) => console.error("Score sync error:", err));
+
+            } catch (error) {
+                console.error("Cloud init failed:", error);
+            }
+        }
+
+        window.saveImageToCloud = async function(sportId, base64Data) {
+            window.customImages[sportId] = base64Data;
+            localStorage.setItem('my_sports_img_' + sportId, base64Data);
+            if (window.updateAllViews) window.updateAllViews();
+            
+            if (!window.isFirebaseReady || !auth.currentUser) return;
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'sports_images', String(sportId));
+                await setDoc(docRef, { imageData: base64Data });
+            } catch (err) { console.error("Save image failed", err); }
+        };
+
+        window.deleteImageFromCloud = async function(sportId) {
+            delete window.customImages[sportId];
+            localStorage.removeItem('my_sports_img_' + sportId);
+            if (window.updateAllViews) window.updateAllViews();
+
+            if (!window.isFirebaseReady || !auth.currentUser) return;
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'sports_images', String(sportId));
+                await deleteDoc(docRef);
+            } catch (err) { console.error("Delete image failed", err); }
+        };
+
+        window.saveScoreToCloud = async function(name, score) {
+            const scoreObj = {
+                name: name,
+                score: score,
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' }),
+                timestamp: Date.now()
+            };
+            window.quizScores.push(scoreObj);
+            localStorage.setItem('my_sports_scores', JSON.stringify(window.quizScores));
+            
+            if (!window.isFirebaseReady || !auth.currentUser) return;
+            try {
+                const scoresRef = collection(db, 'artifacts', appId, 'public', 'data', 'scores');
+                await addDoc(scoresRef, scoreObj);
+            } catch (err) { console.error("Save score failed", err); }
+        };
+
+        window.clearScoresFromCloud = async function() {
+            if (!window.isFirebaseReady || !auth.currentUser) {
+                window.quizScores = [];
+                localStorage.removeItem('my_sports_scores');
+                if (window.initDashboard) window.initDashboard();
+                return;
+            }
+            try {
+                const scoresRef = collection(db, 'artifacts', appId, 'public', 'data', 'scores');
+                const snapshot = await getDocs(scoresRef);
+                snapshot.forEach(docSnap => {
+                    deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'scores', docSnap.id));
+                });
+                localStorage.removeItem('my_sports_scores');
+            } catch (err) { console.error("Clear scores failed", err); }
+        };
+
+        // Initialize Cloud System
+        initFirebase();
+    </script>
+
+    <script>
+        const svgShooting = `data:image/svg+xml;charset=utf-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#1a202c"/><circle cx="400" cy="300" r="200" fill="#e2e8f0"/><circle cx="400" cy="300" r="150" fill="#e53e3e"/><circle cx="400" cy="300" r="100" fill="#e2e8f0"/><circle cx="400" cy="300" r="50" fill="#e53e3e"/><path d="M400,50 L400,550 M150,300 L650,300" stroke="#1a202c" stroke-width="10"/></svg>')}`;
+        const svgPoleVault = `data:image/svg+xml;charset=utf-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#2b6cb0"/><rect x="150" y="450" width="500" height="150" fill="#2d3748"/><line x1="150" y1="200" x2="650" y2="200" stroke="#ecc94b" stroke-width="20"/><path d="M300,500 L600,100" stroke="#e2e8f0" stroke-width="15" fill="none"/><circle cx="450" cy="120" r="40" fill="#fbd38d"/><path d="M450,160 L400,250 L480,350" stroke="#fbd38d" stroke-width="20" fill="none"/></svg>')}`;
+        const svgHammerThrow = `data:image/svg+xml;charset=utf-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#276749"/><circle cx="400" cy="400" r="150" fill="#2f855a"/><circle cx="400" cy="300" r="40" fill="#fbd38d"/><path d="M400,340 L350,450 L450,550" stroke="#fbd38d" stroke-width="20" fill="none"/><line x1="400" y1="380" x2="600" y2="200" stroke="#cbd5e0" stroke-width="10"/><circle cx="600" cy="200" r="30" fill="#a0aec0"/></svg>')}`;
+        const svgJavelin = `data:image/svg+xml;charset=utf-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#744210"/><circle cx="350" cy="300" r="40" fill="#fbd38d"/><path d="M350,340 L300,450 L400,550 M350,380 L450,300" stroke="#fbd38d" stroke-width="20" fill="none"/><line x1="150" y1="450" x2="650" y2="150" stroke="#e2e8f0" stroke-width="15"/></svg>')}`;
+        const svgShotPut = `data:image/svg+xml;charset=utf-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#2c5282"/><circle cx="400" cy="250" r="40" fill="#fbd38d"/><path d="M400,290 L350,450 L450,550 M400,330 L480,280" stroke="#fbd38d" stroke-width="20" fill="none"/><circle cx="480" cy="250" r="30" fill="#a0aec0"/></svg>')}`;
+        const svgHighJump = `data:image/svg+xml;charset=utf-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#9b2c2c"/><rect x="150" y="450" width="500" height="150" fill="#4a5568"/><line x1="150" y1="100" x2="150" y2="450" stroke="#e2e8f0" stroke-width="20"/><line x1="650" y1="100" x2="650" y2="450" stroke="#e2e8f0" stroke-width="20"/><line x1="150" y1="250" x2="650" y2="250" stroke="#ecc94b" stroke-width="15"/><circle cx="400" cy="150" r="40" fill="#fbd38d"/><path d="M400,190 L350,280 L450,350" stroke="#fbd38d" stroke-width="20" fill="none"/></svg>')}`;
+        const svgLongJump = `data:image/svg+xml;charset=utf-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#2d3748"/><rect x="100" y="450" width="600" height="150" fill="#d69e2e"/><circle cx="300" cy="250" r="40" fill="#fbd38d"/><path d="M300,290 L350,400 L250,500 M300,330 L450,280" stroke="#fbd38d" stroke-width="20" fill="none"/><path d="M150,500 Q400,200 650,500" stroke="#718096" stroke-width="10" fill="none" stroke-dasharray="20,10"/></svg>')}`;
+
+        const sportsData = [
+            { id: 1, en: "Badminton", emoji: "🏸", img: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80" },
+            { id: 2, en: "Weightlifting", emoji: "🏋️", img: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80" },
+            { id: 3, en: "Basketball", emoji: "🏀", img: "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80" },
+            { id: 4, en: "Track and Field", emoji: "🏃", img: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=800&q=80" },
+            { id: 5, en: "Shooting", emoji: "🎯", img: svgShooting },
+            { id: 6, en: "Pole Vault", emoji: "🩼", img: svgPoleVault },
+            { id: 7, en: "Hammer Throw", emoji: "🔨", img: svgHammerThrow },
+            { id: 8, en: "Javelin Throw", emoji: "🏹", img: svgJavelin },
+            { id: 9, en: "Shot Put", emoji: "🪨", img: svgShotPut },
+            { id: 10, en: "High Jump", emoji: "🤸", img: svgHighJump },
+            { id: 11, en: "Long Jump", emoji: "🦘", img: svgLongJump }
+        ];
+
+        let currentUtterance = null;
+        let pendingUploadId = null;
+
+        // Image Renderer - Checks cloud/memory first, then falls back to true image, then emoji
+        function getSportDisplay(sport, containerClasses, iconClasses) {
+            const customImg = window.customImages ? window.customImages[sport.id] : null;
+            const displayImg = customImg || sport.img;
+            
+            if (displayImg) {
+                const fallbackText = sport.en.toUpperCase();
+                const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="#111"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50" font-family="sans-serif" font-weight="bold" fill="#FFD700">${fallbackText}</text></svg>`;
+                const fallbackSvg = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgContent)}`;
+                
+                return `<div class="${containerClasses} overflow-hidden bg-gray-900 border-2 border-gray-800 flex items-center justify-center relative">
+                            <img src="${displayImg}" class="w-full h-full object-cover" alt="${sport.en}" onerror="this.onerror=null; this.src='${fallbackSvg}';">
+                        </div>`;
+            } else {
+                return `<div class="${containerClasses} bg-gray-900 border-2 border-red-900 flex items-center justify-center ${iconClasses} text-white drop-shadow-2xl">
+                            ${sport.emoji}
+                        </div>`;
+            }
+        }
+
+        // Image Compressor & Saver
+        document.getElementById('global-img-upload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file || !pendingUploadId) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_SIZE = 2048; // Increased size limit for HD clarity
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_SIZE) { height *= MAX_SIZE / width; width = MAX_SIZE; }
+                    } else {
+                        if (height > MAX_SIZE) { width *= MAX_SIZE / height; height = MAX_SIZE; }
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    const dataUrl = canvas.toDataURL('image/png'); // Use lossless PNG instead of compressed JPEG
+                    
+                    if(window.saveImageToCloud) {
+                        window.saveImageToCloud(pendingUploadId, dataUrl);
+                        showMessage("SUCCESS", "PICTURE UPLOADED & SAVED TO CLOUD!", true);
+                    }
+                    event.target.value = ''; // reset input
+                }
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        });
+
+        window.triggerUpload = function(sportId) {
+            pendingUploadId = sportId;
+            document.getElementById('global-img-upload').click();
+        }
+
+        window.resetImage = function(sportId) {
+            if(window.deleteImageFromCloud) {
+                window.deleteImageFromCloud(sportId);
+            }
+        }
+
+        // View Updater (Called by Realtime Cloud Sync)
+        window.updateAllViews = function() {
+            if (!document.getElementById('sec-vocabulary').classList.contains('hide')) renderVocabCard();
+            if (!document.getElementById('sec-gallery').classList.contains('hide')) initGallery();
+            if (!document.getElementById('sec-listening').classList.contains('hide') && window.listeningCurrentOptions) renderListeningOptions();
+            if (!document.getElementById('sec-speaking').classList.contains('hide')) renderSpeakingCard();
+            
+            // Live update for active quiz/identify screens
+            if (!document.getElementById('sec-identify').classList.contains('hide') && window.identifyCurrentSport && !window.identifyIsAnswered) {
+                const imgArea = document.getElementById('identify-image');
+                if(imgArea) {
+                    const sport = window.identifyCurrentSport;
+                    const hasCustomImage = window.customImages && window.customImages[sport.id];
+                    const toolBar = `
+                        <div class="teacher-tool absolute top-2 right-2 flex gap-2 z-10 opacity-80 hover:opacity-100">
+                            <button onclick="event.stopPropagation(); triggerUpload(${sport.id})" class="bg-gray-900 border border-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-gray-700" title="Upload">📷</button>
+                            ${hasCustomImage ? `<button onclick="event.stopPropagation(); resetImage(${sport.id})" class="bg-red-900 border border-red-700 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-red-800" title="Reset">🗑️</button>` : ''}
+                        </div>
+                    `;
+                    imgArea.innerHTML = `
+                        <div class="relative w-full h-full max-w-sm mx-auto">
+                            ${toolBar}
+                            ${getSportDisplay(sport, "w-full h-full rounded-2xl shadow-lg border-2 border-gray-700", "text-[6rem] sm:text-[8rem]")}
+                        </div>
+                    `;
+                }
+            }
+            if (!document.getElementById('sec-quiz-active').classList.contains('hide') && window.activeQuizSport) {
+                const q = quizQuestions[currentQuizIndex];
+                const mediaArea = document.getElementById('quiz-media-area');
+                const optionsContainer = document.getElementById('quiz-options');
+                
+                if (window.activeQuizType !== 'listen') {
+                    const sport = window.activeQuizSport;
+                    const hasCustomImage = window.customImages && window.customImages[sport.id];
+                    const toolBar = `
+                        <div class="teacher-tool absolute top-2 right-2 flex gap-2 z-10 opacity-80 hover:opacity-100">
+                            <button onclick="event.stopPropagation(); triggerUpload(${sport.id})" class="bg-gray-900 border border-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-gray-700" title="Upload">📷</button>
+                            ${hasCustomImage ? `<button onclick="event.stopPropagation(); resetImage(${sport.id})" class="bg-red-900 border border-red-700 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-red-800" title="Reset">🗑️</button>` : ''}
+                        </div>
+                    `;
+                    if(mediaArea) mediaArea.innerHTML = `
+                        <div class="relative w-full h-full max-w-sm mx-auto">
+                            ${toolBar}
+                            ${getSportDisplay(sport, "w-full h-full rounded-2xl shadow-lg border-2 border-gray-700", "text-[6rem] sm:text-[8rem]")}
+                        </div>
+                    `;
+                } else if (window.activeQuizType === 'listen' && q) {
+                    optionsContainer.innerHTML = '';
+                    q.options.forEach(opt => {
+                        const btn = document.createElement('div');
+                        btn.className = "relative bg-gray-800 hover:bg-gray-700 text-white font-black py-3 px-2 sm:py-6 sm:px-4 rounded-2xl text-xs sm:text-xl transition flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 border-4 border-gray-700 uppercase shadow-lg break-words cursor-pointer";
+                        const hasCustomImage = window.customImages && window.customImages[opt.id];
+                        const toolBar = `
+                            <div class="teacher-tool absolute top-1 right-1 flex gap-1 z-10 opacity-80 hover:opacity-100">
+                                <button onclick="event.stopPropagation(); triggerUpload(${opt.id})" class="bg-gray-900 border border-gray-600 rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md hover:bg-gray-700" title="Upload">📷</button>
+                                ${hasCustomImage ? `<button onclick="event.stopPropagation(); resetImage(${opt.id})" class="bg-red-900 border border-red-700 rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md hover:bg-red-800" title="Reset">🗑️</button>` : ''}
+                            </div>
+                        `;
+                        btn.innerHTML = `
+                            ${toolBar}
+                            ${getSportDisplay(opt, "w-10 h-10 sm:w-16 sm:h-16 rounded-xl shrink-0", "text-[2rem] sm:text-[3rem]")} 
+                            <span class="text-center">${opt.en}</span>
+                        `;
+                        btn.onclick = () => handleQuizAnswer(opt.id === q.target.id);
+                        optionsContainer.appendChild(btn);
+                    });
+                }
+            }
+        };
+
+        const sections = ['menu', 'vocabulary', 'gallery', 'listening', 'identify', 'speaking', 'quiz-intro', 'quiz-active', 'dashboard'];
+        
+        window.navigate = function(targetId) {
+            stopAudio(); 
+            sections.forEach(sec => {
+                const el = document.getElementById(`sec-${sec}`);
+                if(el) {
+                    if(sec === targetId) {
+                        el.classList.remove('hide');
+                        if(sec === 'vocabulary') initVocabulary();
+                        if(sec === 'gallery') initGallery();
+                        if(sec === 'listening') initListening();
+                        if(sec === 'identify') initIdentify();
+                        if(sec === 'speaking') initSpeaking();
+                        if(sec === 'quiz-intro') initQuizIntro();
+                        if(sec === 'dashboard') window.initDashboard();
+                    } else {
+                        el.classList.add('hide');
+                    }
+                }
+            });
+        }
+
+        function showMessage(title, message, isSuccess = true) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-title').className = `text-2xl sm:text-3xl font-black mb-2 tracking-wide uppercase break-words ${isSuccess ? 'text-green-400' : 'text-red-500'}`;
+            document.getElementById('modal-message').textContent = message;
+            document.getElementById('modal-icon').textContent = isSuccess ? '✅' : '❌';
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        window.closeModal = function() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        window.playAudioText = function(text, rate = 1.0) {
+            if (!window.speechSynthesis) {
+                showMessage("ERROR", "AUDIO NOT SUPPORTED ON THIS DEVICE.", false);
+                return;
+            }
+            window.speechSynthesis.cancel(); 
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            currentUtterance.lang = 'en-US';
+            currentUtterance.rate = rate;
+            window.speechSynthesis.speak(currentUtterance);
+        }
+
+        window.stopAudio = function() {
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+        }
+
+        let vocabIndex = 0;
+        function initVocabulary() {
+            vocabIndex = 0;
+            renderVocabCard();
+            
+            document.getElementById('btn-vocab-prev').onclick = () => {
+                if (vocabIndex > 0) { vocabIndex--; renderVocabCard(); }
+            };
+            document.getElementById('btn-vocab-next').onclick = () => {
+                if (vocabIndex < sportsData.length - 1) { vocabIndex++; renderVocabCard(); }
+            };
+        }
+
+        function renderVocabCard() {
+            stopAudio();
+            const sport = sportsData[vocabIndex];
+            document.getElementById('vocab-counter').textContent = `${vocabIndex + 1} / ${sportsData.length}`;
+            
+            document.getElementById('btn-vocab-prev').disabled = vocabIndex === 0;
+            document.getElementById('btn-vocab-next').disabled = vocabIndex === sportsData.length - 1;
+
+            const container = document.getElementById('vocab-card-container');
+            const hasCustomImage = window.customImages && window.customImages[sport.id];
+
+            // Resized fonts to strictly prevent cut-offs
+            container.innerHTML = `
+                ${getSportDisplay(sport, "w-full md:w-1/2 flex-grow min-h-[40%]", "text-[8rem] sm:text-[10rem] md:text-[14rem]")}
+                <div class="w-full md:w-1/2 p-4 sm:p-8 flex flex-col justify-center text-center bg-gray-900 border-t-4 md:border-t-0 md:border-l-4 border-red-800 relative min-h-[50%]">
+                    
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-yellow-400 mb-4 sm:mb-8 tracking-widest uppercase drop-shadow-lg break-words whitespace-normal leading-tight px-2">
+                        ${sport.en}
+                    </h3>
+                    
+                    <div class="flex flex-col gap-3 sm:gap-4 justify-center w-full max-w-sm mx-auto mb-4">
+                        <button onclick="playAudioText('${sport.en}', 0.45)" class="w-full bg-gray-800 border-2 border-red-500 hover:bg-gray-700 text-yellow-400 font-black py-3 sm:py-5 rounded-2xl text-lg sm:text-2xl flex items-center justify-center gap-2 sm:gap-3 transition shadow-lg uppercase">
+                            <span>🐢</span> SLOW
+                        </button>
+                        <button onclick="playAudioText('${sport.en}', 1.0)" class="w-full bg-red-600 hover:bg-red-500 text-white font-black py-3 sm:py-5 rounded-2xl text-lg sm:text-2xl flex items-center justify-center gap-2 sm:gap-3 transition shadow-lg uppercase">
+                            <span>🔊</span> NORMAL
+                        </button>
+                        <button onclick="stopAudio()" class="w-full bg-black border-2 border-gray-600 hover:bg-gray-800 text-gray-400 font-bold py-2 sm:py-4 rounded-xl text-sm sm:text-xl transition mt-1 uppercase">
+                            ⏹ STOP AUDIO
+                        </button>
+                    </div>
+                    
+                    <div class="teacher-tool mt-auto border-t-2 border-gray-700 pt-4 flex flex-col gap-2 max-w-sm mx-auto w-full">
+                        <button onclick="triggerUpload(${sport.id})" class="bg-gray-800 hover:bg-gray-700 text-white py-2 sm:py-3 rounded-xl text-sm sm:text-lg font-bold flex justify-center items-center gap-2 transition uppercase border border-gray-600">
+                            📷 UPLOAD A NEW PICTURE
+                        </button>
+                        ${hasCustomImage ? `<button onclick="resetImage(${sport.id})" class="bg-red-900 hover:bg-red-800 text-white py-2 sm:py-3 rounded-xl text-sm sm:text-lg font-bold flex justify-center items-center gap-2 transition uppercase border border-red-700">🗑️ REMOVE PICTURE</button>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function initGallery() {
+            const grid = document.getElementById('gallery-grid');
+            grid.innerHTML = '';
+            sportsData.forEach(sport => {
+                const hasCustomImage = window.customImages && window.customImages[sport.id];
+                const card = document.createElement('div');
+                card.className = "bg-black rounded-2xl shadow-lg hover:shadow-2xl transition-all border-2 border-gray-800 hover:border-red-500 overflow-hidden text-center cursor-pointer flex flex-col aspect-square group relative";
+                card.onclick = () => playAudioText(sport.en, 1.0);
+                
+                // Add mini toolbar for image management directly on gallery
+                const toolBar = `
+                    <div class="teacher-tool absolute top-1 right-1 flex gap-1 z-10 opacity-80 hover:opacity-100">
+                        <button onclick="event.stopPropagation(); triggerUpload(${sport.id})" class="bg-gray-900 border border-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-gray-700" title="Upload">📷</button>
+                        ${hasCustomImage ? `<button onclick="event.stopPropagation(); resetImage(${sport.id})" class="bg-red-900 border border-red-700 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-red-800" title="Reset">🗑️</button>` : ''}
+                    </div>
+                `;
+
+                card.innerHTML = `
+                    ${toolBar}
+                    ${getSportDisplay(sport, "flex-grow", "text-[3rem] sm:text-[4rem] group-hover:scale-110 transition-transform")}
+                    <div class="p-2 sm:p-3 shrink-0 bg-gray-900 border-t border-gray-800 w-full flex items-center justify-center h-12 sm:h-16">
+                        <h4 class="text-xs sm:text-sm md:text-base font-black text-white uppercase tracking-wider break-words leading-tight w-full px-1">${sport.en}</h4>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.listeningCurrentSport = null;
+        window.listeningIsAnswered = false;
+        window.listeningCurrentOptions = [];
+        window.listeningSelectedId = null;
+
+        function initListening() { generateListeningQuestion(); }
+
+        function generateListeningQuestion() {
+            window.listeningIsAnswered = false;
+            window.listeningSelectedId = null;
+            document.getElementById('btn-listening-next').classList.add('hidden');
+            
+            const targetIndex = Math.floor(Math.random() * sportsData.length);
+            window.listeningCurrentSport = sportsData[targetIndex];
+            
+            let options = [window.listeningCurrentSport];
+            while (options.length < 4) {
+                const randomSport = sportsData[Math.floor(Math.random() * sportsData.length)];
+                if (!options.find(o => o.id === randomSport.id)) options.push(randomSport);
+            }
+            options.sort(() => Math.random() - 0.5);
+            window.listeningCurrentOptions = options;
+            
+            renderListeningOptions();
+            setTimeout(() => playAudioText(window.listeningCurrentSport.en, 1.0), 500);
+        }
+
+        function renderListeningOptions() {
+            const optionsContainer = document.getElementById('listening-options');
+            if (!optionsContainer) return;
+            optionsContainer.innerHTML = '';
+            
+            window.listeningCurrentOptions.forEach(opt => {
+                const btn = document.createElement('div');
+                
+                let bgClass = "bg-gray-800 hover:bg-gray-700";
+                let borderClass = "border-gray-700";
+                let textClass = "text-white";
+
+                if (window.listeningIsAnswered) {
+                    if (opt.id === window.listeningCurrentSport.id) {
+                        bgClass = "bg-green-800";
+                        borderClass = "border-green-500";
+                        textClass = "text-green-300";
+                    } else if (opt.id === window.listeningSelectedId) {
+                        bgClass = "bg-red-900";
+                        borderClass = "border-red-600";
+                        textClass = "text-red-300";
+                    } else if (opt.id !== window.listeningSelectedId) {
+                        bgClass = "bg-gray-800";
+                    }
+                }
+
+                btn.className = `relative ${bgClass} ${textClass} font-black py-4 px-2 sm:py-6 sm:px-4 rounded-2xl text-sm sm:text-2xl transition border-4 ${borderClass} flex flex-col items-center gap-2 uppercase shadow-lg w-full break-words cursor-pointer`;
+                
+                const hasCustomImage = window.customImages && window.customImages[opt.id];
+                const toolBar = `
+                    <div class="teacher-tool absolute top-1 right-1 flex gap-1 z-10 opacity-80 hover:opacity-100">
+                        <button onclick="event.stopPropagation(); triggerUpload(${opt.id})" class="bg-gray-900 border border-gray-600 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm shadow-md hover:bg-gray-700" title="Upload">📷</button>
+                        ${hasCustomImage ? `<button onclick="event.stopPropagation(); resetImage(${opt.id})" class="bg-red-900 border border-red-700 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm shadow-md hover:bg-red-800" title="Reset">🗑️</button>` : ''}
+                    </div>
+                `;
+
+                btn.innerHTML = `
+                    ${toolBar}
+                    ${getSportDisplay(opt, "w-12 h-12 sm:w-20 sm:h-20 rounded-xl mb-1 mt-2", "text-[2rem] sm:text-[3rem]")} 
+                    <span class="w-full text-center px-1 leading-tight">${opt.en}</span>
+                `;
+                btn.onclick = () => checkListeningAnswer(opt.id);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        window.playListeningAudio = function(rate) { if(window.listeningCurrentSport) playAudioText(window.listeningCurrentSport.en, rate); }
+
+        function checkListeningAnswer(selectedId) {
+            if (window.listeningIsAnswered) return;
+            window.listeningIsAnswered = true;
+            window.listeningSelectedId = selectedId;
+            
+            if (selectedId === window.listeningCurrentSport.id) {
+                showMessage("CORRECT!", "GREAT JOB!", true);
+            } else {
+                showMessage("TRY AGAIN!", `CORRECT ANSWER: ${window.listeningCurrentSport.en}`, false);
+            }
+            
+            renderListeningOptions();
+            
+            document.getElementById('btn-listening-next').classList.remove('hidden');
+            document.getElementById('btn-listening-next').onclick = generateListeningQuestion;
+        }
+
+        window.identifyCurrentSport = null;
+        window.identifyIsAnswered = false;
+
+        function initIdentify() { generateIdentifyQuestion(); }
+
+        function generateIdentifyQuestion() {
+            window.identifyIsAnswered = false;
+            document.getElementById('btn-identify-next').classList.add('hidden');
+            
+            const targetIndex = Math.floor(Math.random() * sportsData.length);
+            window.identifyCurrentSport = sportsData[targetIndex];
+            
+            const imgArea = document.getElementById('identify-image');
+            const sport = window.identifyCurrentSport;
+            const hasCustomImage = window.customImages && window.customImages[sport.id];
+            const toolBar = `
+                <div class="teacher-tool absolute top-2 right-2 flex gap-2 z-10 opacity-80 hover:opacity-100">
+                    <button onclick="event.stopPropagation(); triggerUpload(${sport.id})" class="bg-gray-900 border border-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-gray-700" title="Upload">📷</button>
+                    ${hasCustomImage ? `<button onclick="event.stopPropagation(); resetImage(${sport.id})" class="bg-red-900 border border-red-700 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-red-800" title="Reset">🗑️</button>` : ''}
+                </div>
+            `;
+            imgArea.innerHTML = `
+                <div class="relative w-full h-full max-w-sm mx-auto">
+                    ${toolBar}
+                    ${getSportDisplay(sport, "w-full h-full rounded-2xl shadow-lg border-2 border-gray-700", "text-[6rem] sm:text-[8rem]")}
+                </div>
+            `;
+
+            let options = [window.identifyCurrentSport];
+            while (options.length < 4) {
+                const randomSport = sportsData[Math.floor(Math.random() * sportsData.length)];
+                if (!options.find(o => o.id === randomSport.id)) options.push(randomSport);
+            }
+            options.sort(() => Math.random() - 0.5);
+            
+            const optionsContainer = document.getElementById('identify-options');
+            optionsContainer.innerHTML = '';
+            
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "bg-gray-800 hover:bg-gray-700 text-white font-black py-4 px-2 sm:py-6 sm:px-4 rounded-2xl text-sm sm:text-2xl transition border-4 border-gray-700 uppercase shadow-lg break-words leading-tight flex items-center justify-center";
+                btn.innerHTML = opt.en;
+                btn.onclick = () => checkIdentifyAnswer(opt.id, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkIdentifyAnswer(selectedId, btnElement) {
+            if (window.identifyIsAnswered) return;
+            window.identifyIsAnswered = true;
+            
+            if (selectedId === window.identifyCurrentSport.id) {
+                btnElement.classList.replace('bg-gray-800', 'bg-green-800');
+                btnElement.classList.replace('border-gray-700', 'border-green-500');
+                playAudioText(window.identifyCurrentSport.en, 1.0);
+                showMessage("CORRECT!", "EXCELLENT!", true);
+            } else {
+                btnElement.classList.replace('bg-gray-800', 'bg-red-900');
+                btnElement.classList.replace('border-gray-700', 'border-red-600');
+                
+                const buttons = document.getElementById('identify-options').children;
+                for(let b of buttons) {
+                    if(b.innerHTML === window.identifyCurrentSport.en) {
+                        b.classList.replace('bg-gray-800', 'bg-green-800');
+                        b.classList.replace('border-gray-700', 'border-green-500');
+                    }
+                }
+                showMessage("TRY AGAIN!", `CORRECT WORD: ${window.identifyCurrentSport.en}`, false);
+            }
+            document.getElementById('btn-identify-next').classList.remove('hidden');
+            document.getElementById('btn-identify-next').onclick = generateIdentifyQuestion;
+        }
+
+        let speakingIndex = 0;
+        let recognition = null;
+        let isRecording = false;
+
+        function initSpeaking() {
+            speakingIndex = 0;
+            
+            window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (window.SpeechRecognition) {
+                recognition = new SpeechRecognition();
+                recognition.lang = 'en-US';
+                recognition.interimResults = false;
+                recognition.maxAlternatives = 1;
+
+                recognition.onstart = function() {
+                    isRecording = true;
+                    document.getElementById('btn-record').classList.add('speaking-pulse', 'bg-yellow-500', 'border-yellow-300');
+                    document.getElementById('btn-record').classList.remove('bg-red-600', 'border-red-400');
+                    document.getElementById('speaking-status').textContent = "LISTENING...";
+                    document.getElementById('speaking-result').textContent = "";
+                };
+
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript.toLowerCase().trim();
+                    const targetWord = sportsData[speakingIndex].en.toLowerCase();
+                    const resultEl = document.getElementById('speaking-result');
+                    
+                    if (transcript.includes(targetWord) || targetWord.includes(transcript) || compareWords(transcript, targetWord)) {
+                        resultEl.innerHTML = `<span class="text-green-400 uppercase tracking-wide">"${transcript}"</span> ✅`;
+                        showMessage("PERFECT!", "GREAT PRONUNCIATION!", true);
+                    } else {
+                        resultEl.innerHTML = `<span class="text-red-500 uppercase tracking-wide">"${transcript}"</span> ❌`;
+                    }
+                };
+
+                recognition.onerror = function() {
+                    document.getElementById('speaking-status').textContent = "ERROR. TRY AGAIN.";
+                    resetRecordButton();
+                };
+
+                recognition.onend = function() { resetRecordButton(); };
+            } else {
+                document.getElementById('speaking-status').textContent = "AUDIO NOT SUPPORTED.";
+                document.getElementById('btn-record').disabled = true;
+                document.getElementById('btn-record').style.opacity = '0.5';
+            }
+
+            renderSpeakingCard();
+
+            document.getElementById('btn-speak-prev').onclick = () => {
+                if (speakingIndex > 0) { speakingIndex--; renderSpeakingCard(); }
+            };
+            document.getElementById('btn-speak-next').onclick = () => {
+                if (speakingIndex < sportsData.length - 1) { speakingIndex++; renderSpeakingCard(); }
+            };
+            document.getElementById('btn-record').onclick = toggleRecording;
+        }
+
+        function compareWords(word1, word2) {
+            word1 = word1.replace(/[^a-z]/g, '');
+            word2 = word2.replace(/[^a-z]/g, '');
+            if(word1.length < 3) return false;
+            return word1 === word2 || word2.startsWith(word1) || word1.startsWith(word2);
+        }
+
+        function renderSpeakingCard() {
+            const sport = sportsData[speakingIndex];
+            
+            // Render Image
+            const imgArea = document.getElementById('speaking-image');
+            if (imgArea) {
+                const hasCustomImage = window.customImages && window.customImages[sport.id];
+                const toolBar = `
+                    <div class="teacher-tool absolute top-2 right-2 flex gap-2 z-10 opacity-80 hover:opacity-100">
+                        <button onclick="event.stopPropagation(); triggerUpload(${sport.id})" class="bg-gray-900 border border-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-gray-700" title="Upload">📷</button>
+                        ${hasCustomImage ? `<button onclick="event.stopPropagation(); resetImage(${sport.id})" class="bg-red-900 border border-red-700 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-red-800" title="Reset">🗑️</button>` : ''}
+                    </div>
+                `;
+                imgArea.innerHTML = `
+                    <div class="relative w-full h-full max-w-sm mx-auto">
+                        ${toolBar}
+                        ${getSportDisplay(sport, "w-full h-full rounded-2xl shadow-lg border-2 border-purple-700", "text-[5rem] sm:text-[7rem]")}
+                    </div>
+                `;
+            }
+
+            document.getElementById('speaking-target').textContent = sport.en;
+            document.getElementById('speaking-result').textContent = "";
+            document.getElementById('speaking-status').textContent = "CLICK MICROPHONE TO SPEAK";
+            document.getElementById('btn-speak-prev').disabled = speakingIndex === 0;
+            document.getElementById('btn-speak-next').disabled = speakingIndex === sportsData.length - 1;
+        }
+
+        window.playSpeakingAudio = function(rate) { playAudioText(sportsData[speakingIndex].en, rate); }
+
+        function toggleRecording() {
+            if (!recognition) return;
+            isRecording ? recognition.stop() : recognition.start();
+        }
+
+        function resetRecordButton() {
+            isRecording = false;
+            document.getElementById('btn-record').classList.remove('speaking-pulse', 'bg-yellow-500', 'border-yellow-300');
+            document.getElementById('btn-record').classList.add('bg-red-600', 'border-red-400');
+            if(document.getElementById('speaking-status').textContent.includes("LISTENING")) {
+                 document.getElementById('speaking-status').textContent = "CLICK MICROPHONE TO SPEAK";
+            }
+        }
+
+        let selectedStudentNumber = null;
+
+        function initQuizIntro() {
+            selectedStudentNumber = null;
+            const displayObj = document.getElementById('selected-student-display');
+            if(displayObj) displayObj.classList.add('hidden');
+            
+            const grid = document.getElementById('student-number-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            
+            // Generates student numbers 1 through 20
+            for(let i = 1; i <= 20; i++) {
+                const btn = document.createElement('button');
+                btn.className = "bg-gray-800 hover:bg-gray-700 border-2 border-gray-600 text-white font-bold py-2 sm:py-3 rounded-xl text-lg sm:text-xl transition student-num-btn shadow-md";
+                btn.textContent = i;
+                btn.onclick = () => {
+                    selectedStudentNumber = i;
+                    document.querySelectorAll('.student-num-btn').forEach(b => {
+                        b.classList.remove('bg-red-600', 'border-red-400');
+                        b.classList.add('bg-gray-800', 'border-gray-600');
+                    });
+                    btn.classList.remove('bg-gray-800', 'border-gray-600');
+                    btn.classList.add('bg-red-600', 'border-red-400');
+                    
+                    document.getElementById('display-num').textContent = i;
+                    document.getElementById('selected-student-display').classList.remove('hidden');
+                };
+                grid.appendChild(btn);
+            }
+        }
+
+        let currentStudent = "";
+        let quizQuestions = [];
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+        
+        window.activeQuizSport = null;
+        window.activeQuizType = null;
+
+        window.startQuiz = function() {
+            if (!selectedStudentNumber) { showMessage("ATTENTION", "PLEASE SELECT YOUR STUDENT NUMBER FIRST.", false); return; }
+            currentStudent = "Student " + selectedStudentNumber;
+            quizScore = 0;
+            currentQuizIndex = 0;
+            
+            quizQuestions = [];
+            const tempSports = [...sportsData].sort(() => Math.random() - 0.5);
+            
+            for(let i=0; i<10; i++) {
+                const sport = tempSports[i % tempSports.length];
+                const type = Math.random() > 0.5 ? 'listen' : 'identify';
+                
+                let opts = [sport];
+                while(opts.length < 4) {
+                    const r = sportsData[Math.floor(Math.random() * sportsData.length)];
+                    if(!opts.find(o => o.id === r.id)) opts.push(r);
+                }
+                opts.sort(() => Math.random() - 0.5);
+                quizQuestions.push({ type: type, target: sport, options: opts });
+            }
+
+            document.getElementById('sec-quiz-intro').classList.add('hide');
+            document.getElementById('sec-quiz-active').classList.remove('hide');
+            renderQuizQuestion();
+        }
+
+        function renderQuizQuestion() {
+            if (currentQuizIndex >= 10) { endQuiz(); return; }
+
+            const q = quizQuestions[currentQuizIndex];
+            window.activeQuizSport = q.target;
+            window.activeQuizType = q.type;
+            
+            document.getElementById('quiz-progress').textContent = `Q ${currentQuizIndex + 1} / 10`;
+            document.getElementById('quiz-score-display').textContent = `SCORE: ${quizScore * 10}`;
+
+            const mediaArea = document.getElementById('quiz-media-area');
+            const questionText = document.getElementById('quiz-question-text');
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            if (q.type === 'listen') {
+                questionText.textContent = "LISTEN AND CHOOSE";
+                mediaArea.innerHTML = `
+                    <button onclick="playAudioText('${q.target.en}', 1.0)" class="w-24 h-24 sm:w-40 sm:h-40 bg-blue-600 hover:bg-blue-500 border-4 border-blue-400 text-white rounded-full flex items-center justify-center text-[4rem] sm:text-[5rem] transition shadow-[0_0_30px_rgba(59,130,246,0.6)] shrink-0">
+                        🔊
+                    </button>
+                `;
+                setTimeout(() => playAudioText(q.target.en, 1.0), 500);
+
+                q.options.forEach(opt => {
+                    const btn = document.createElement('div');
+                    btn.className = "relative bg-gray-800 hover:bg-gray-700 text-white font-black py-3 px-2 sm:py-6 sm:px-4 rounded-2xl text-xs sm:text-xl transition flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 border-4 border-gray-700 uppercase shadow-lg break-words cursor-pointer";
+                    
+                    const hasCustomImage = window.customImages && window.customImages[opt.id];
+                    const toolBar = `
+                        <div class="teacher-tool absolute top-1 right-1 flex gap-1 z-10 opacity-80 hover:opacity-100">
+                            <button onclick="event.stopPropagation(); triggerUpload(${opt.id})" class="bg-gray-900 border border-gray-600 rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md hover:bg-gray-700" title="Upload">📷</button>
+                            ${hasCustomImage ? `<button onclick="event.stopPropagation(); resetImage(${opt.id})" class="bg-red-900 border border-red-700 rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md hover:bg-red-800" title="Reset">🗑️</button>` : ''}
+                        </div>
+                    `;
+
+                    btn.innerHTML = `
+                        ${toolBar}
+                        ${getSportDisplay(opt, "w-10 h-10 sm:w-16 sm:h-16 rounded-xl shrink-0", "text-[2rem] sm:text-[3rem]")} 
+                        <span class="text-center">${opt.en}</span>
+                    `;
+                    btn.onclick = () => handleQuizAnswer(opt.id === q.target.id);
+                    optionsContainer.appendChild(btn);
+                });
+            } else {
+                questionText.textContent = "WHAT SPORT IS THIS?";
+                
+                const sport = q.target;
+                const hasCustomImage = window.customImages && window.customImages[sport.id];
+                const toolBar = `
+                    <div class="teacher-tool absolute top-2 right-2 flex gap-2 z-10 opacity-80 hover:opacity-100">
+                        <button onclick="event.stopPropagation(); triggerUpload(${sport.id})" class="bg-gray-900 border border-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-gray-700" title="Upload">📷</button>
+                        ${hasCustomImage ? `<button onclick="event.stopPropagation(); resetImage(${sport.id})" class="bg-red-900 border border-red-700 rounded-full w-8 h-8 flex items-center justify-center text-sm shadow-md hover:bg-red-800" title="Reset">🗑️</button>` : ''}
+                    </div>
+                `;
+                mediaArea.innerHTML = `
+                    <div class="relative w-full h-full max-w-sm mx-auto">
+                        ${toolBar}
+                        ${getSportDisplay(sport, "w-full h-full rounded-2xl shadow-lg border-2 border-gray-700", "text-[6rem] sm:text-[8rem]")}
+                    </div>
+                `;
+
+                q.options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = "bg-gray-800 hover:bg-gray-700 text-white font-black py-4 px-2 sm:py-6 sm:px-4 rounded-2xl text-sm sm:text-2xl transition border-4 border-gray-700 uppercase shadow-lg break-words flex items-center justify-center text-center";
+                    btn.innerHTML = opt.en;
+                    btn.onclick = () => handleQuizAnswer(opt.id === q.target.id);
+                    optionsContainer.appendChild(btn);
+                });
+            }
+        }
+
+        function handleQuizAnswer(isCorrect) {
+            if (isCorrect) quizScore++;
+            currentQuizIndex++;
+            renderQuizQuestion();
+        }
+
+        function endQuiz() {
+            const finalScore = quizScore * 10;
+            if(window.saveScoreToCloud) {
+                window.saveScoreToCloud(currentStudent, finalScore);
+            }
+            showMessage("QUIZ FINISHED!", `YOUR SCORE: ${finalScore} / 100`, true);
+            window.navigate('menu');
+            document.getElementById('sec-quiz-active').classList.add('hide'); 
+            selectedStudentNumber = null;
+        }
+
+        window.initDashboard = function() {
+            const tbody = document.getElementById('dashboard-table-body');
+            const emptyMsg = document.getElementById('dashboard-empty');
+            tbody.innerHTML = '';
+            
+            if (!window.quizScores || window.quizScores.length === 0) {
+                emptyMsg.classList.remove('hidden');
+            } else {
+                emptyMsg.classList.add('hidden');
+                window.quizScores.forEach(s => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-gray-900 border-b border-gray-800 transition";
+                    tr.innerHTML = `
+                        <td class="p-2 sm:p-4 text-gray-400 text-xs sm:text-base">${s.date}</td>
+                        <td class="p-2 sm:p-4 font-black text-yellow-400 tracking-wider break-words max-w-[150px]">${s.name}</td>
+                        <td class="p-2 sm:p-4 font-black text-lg sm:text-3xl text-right ${s.score >= 80 ? 'text-green-500' : s.score >= 60 ? 'text-yellow-500' : 'text-red-500'}">${s.score}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+        }
+
+        window.clearScoresBtn = function() {
+            document.getElementById('modal-title').textContent = "CONFIRM DELETE";
+            document.getElementById('modal-title').className = "text-2xl sm:text-4xl font-black mb-4 tracking-wide text-red-500 uppercase";
+            document.getElementById('modal-message').textContent = "DELETE ALL SCORES FOR EVERYONE?";
+            document.getElementById('modal-icon').textContent = "⚠️";
+            
+            const btnContainer = document.createElement('div');
+            btnContainer.className = "flex gap-2 sm:gap-4 mt-6 sm:mt-8 w-full";
+            
+            const btnCancel = document.createElement('button');
+            btnCancel.className = "flex-1 bg-gray-700 hover:bg-gray-600 text-white font-black py-3 sm:py-4 rounded-2xl transition uppercase tracking-widest text-sm sm:text-xl";
+            btnCancel.textContent = "CANCEL";
+            btnCancel.onclick = () => { window.closeModal(); resetModalToDefault(); };
+
+            const btnConfirm = document.createElement('button');
+            btnConfirm.className = "flex-1 bg-red-600 hover:bg-red-500 text-white font-black py-3 sm:py-4 rounded-2xl transition shadow-lg uppercase tracking-widest text-sm sm:text-xl";
+            btnConfirm.textContent = "DELETE";
+            btnConfirm.onclick = () => {
+                if(window.clearScoresFromCloud) window.clearScoresFromCloud();
+                window.closeModal();
+                resetModalToDefault();
+            };
+
+            const modalContent = document.querySelector('#custom-modal > div');
+            const defaultOk = modalContent.querySelector('button');
+            defaultOk.style.display = 'none';
+            
+            btnContainer.appendChild(btnCancel);
+            btnContainer.appendChild(btnConfirm);
+            modalContent.appendChild(btnContainer);
+            
+            document.getElementById('custom-modal').classList.remove('hidden');
+
+            function resetModalToDefault() {
+                setTimeout(() => {
+                    btnContainer.remove();
+                    defaultOk.style.display = 'block';
+                }, 300);
+            }
+        }
+
+        window.exportData = function() {
+            const data = { images: window.customImages, scores: window.quizScores };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "my_sports_data.json");
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+            showMessage("EXPORT SUCCESS", "Data saved to my_sports_data.json!", true);
+        };
+
+        window.importData = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (data.images) {
+                        window.customImages = data.images;
+                        for (const [id, img] of Object.entries(data.images)) {
+                            localStorage.setItem('my_sports_img_' + id, img);
+                            if (window.isFirebaseReady && window.saveImageToCloud) window.saveImageToCloud(id, img);
+                        }
+                    }
+                    if (data.scores) {
+                        window.quizScores = data.scores;
+                        localStorage.setItem('my_sports_scores', JSON.stringify(data.scores));
+                    }
+                    if (window.initDashboard) window.initDashboard();
+                    if (window.updateAllViews) window.updateAllViews();
+                    showMessage("IMPORT SUCCESS", "Data loaded successfully!", true);
+                } catch (err) {
+                    showMessage("IMPORT FAILED", "Invalid file format.", false);
+                }
+                event.target.value = ''; 
+            };
+            reader.readAsText(file);
+        };
+
+        window.toggleTeacherMode = function() {
+            const pwdInput = document.getElementById('teacher-pwd');
+            const btn = document.getElementById('btn-teacher-toggle');
+            const body = document.body;
+            
+            if (body.classList.contains('teacher-auth')) {
+                // Logout
+                body.classList.remove('teacher-auth');
+                btn.textContent = "LOGIN";
+                btn.className = "bg-gray-600 hover:bg-gray-500 border-2 border-gray-500 text-white px-4 py-2 rounded-lg font-black transition uppercase tracking-wider w-full sm:w-auto shadow-md";
+                pwdInput.style.display = "block";
+                pwdInput.value = "";
+                showMessage("LOCKED", "Student Mode active. Editing disabled.", true);
+            } else {
+                // Login PIN Check
+                if (pwdInput.value === "1234") { 
+                    body.classList.add('teacher-auth');
+                    btn.textContent = "LOGOUT";
+                    btn.className = "bg-red-600 hover:bg-red-500 border-2 border-red-500 text-white px-4 py-2 rounded-lg font-black transition uppercase tracking-wider w-full sm:w-auto shadow-md";
+                    pwdInput.style.display = "none";
+                    showMessage("UNLOCKED", "Teacher Mode active. You can now change pictures and clear scores.", true);
+                } else {
+                    showMessage("ACCESS DENIED", "Incorrect PIN. (Hint: Use 1234)", false);
+                }
+            }
+        };
+    </script>
+</body>
+</html>
